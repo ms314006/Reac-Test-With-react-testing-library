@@ -1,10 +1,13 @@
 import React from 'react';
 import '@babel/polyfill';
+import { queryAllBy } from 'dom-testing-library'
 import { render, waitForElement } from 'react-testing-library';
 import HelloWord from '../src/component/HelloWord/HelloWord';
 
 test('test <HelloWord />', async () => {
-  const { getByText, } = render(<HelloWord word="I am hero!" />);
+  const { container, getByText, } = render(<HelloWord word="I am hero!" />);
 
-  await waitForElement(() => getByText(/hello Satoshi/i));
+  // queryAPI https://testing-library.com/docs/dom-testing-library/api-queries
+  console.log(container.querySelector('div h1'));
+  await waitForElement(() => getByText('Hello! I am hero!'));
 });
