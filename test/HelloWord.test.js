@@ -1,6 +1,5 @@
 import React from 'react';
 import '@babel/polyfill';
-import { queryAllBy } from 'dom-testing-library'
 import { render, waitForElement } from 'react-testing-library';
 import HelloWord from '../src/component/HelloWord/HelloWord';
 
