@@ -7,9 +7,10 @@ export const Counter = (props) => {
   const { count, addCount, } = props;
   return (
     <div>
-      <span>{`點了${count}下`}</span>
+      <span data-testid="display_count">{`點了${count}下`}</span>
       <br />
-      <button type="button" onClick={addCount}>點我加 1</button>
+      <button className="add_button" type="button" onClick={() => { addCount(1); }}>點我加 1</button>
+      <button className="add_button" type="button" onClick={() => { addCount(2); }}>點我加 2</button>
     </div>
   );
 };
@@ -29,7 +30,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addCount: () => dispatch(addCounter()),
+  addCount: addQuantity => dispatch(addCounter(addQuantity)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);
