@@ -2,7 +2,7 @@ import React from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { render, fireEvent, cleanup } from 'react-testing-library';
-import Counter from '../src/component/Counter/Counter';
+import Counter from '../src/component/CounterWithRedux/Counter';
 import reducer from '../src/reducer/Counter';
 
 const renderWithRedux = (ui, { initialState, store = createStore(reducer, initialState), } = {}) => ({

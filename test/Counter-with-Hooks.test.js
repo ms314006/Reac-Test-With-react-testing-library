@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, cleanup } from 'react-testing-library';
-import Counter from '../src/component/Countera/Counter';
+import Counter from '../src/component/CounterWithHooks/Counter';
 
 describe('Test <Counter />', () => {
   // 每次測試後將 render 的 DOM 清空
