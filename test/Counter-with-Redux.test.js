@@ -13,41 +13,33 @@ const renderWithRedux = (ui, { initialState, store = createStore(reducer, initia
 describe('test <Counter />', () => {
   afterEach(cleanup);
 
-  test('確認 <Counter /> 是否正常 render', () => {
-    const { getByTestId, } = renderWithRedux(<Counter />);
-    expect(getByTestId('display_count').textContent).toBe('點了0下');
-  });
+  test('直接使用 reducer 做測試', () => {
+    const { getByText, getByTestId, } = renderWithRedux(<Counter />);
 
-  test('確認按鈕加上的數量正不正確', () => {
-    const { container, getByTestId, } = renderWithRedux(<Counter />);
-
-    fireEvent.click(container.querySelectorAll('[class="add_button"]')[0]);
+    // +1
+    fireEvent.click(getByText('點我加 1'));
     expect(getByTestId('display_count').textContent).toBe('點了1下');
-
-    fireEvent.click(container.querySelectorAll('[class="add_button"]')[1]);
-    expect(getByTestId('display_count').textContent).toBe('點了3下');
   });
 
   test('預設 reducer 的初始值，從 2 開始', () => {
     const initialState = {
       count: 2,
     };
-    const { container, getByTestId, } = renderWithRedux(<Counter />, { initialState, });
+    const { getByText, getByTestId, } = renderWithRedux(<Counter />, { initialState, });
 
     // +1
-    fireEvent.click(container.querySelectorAll('[class="add_button"]')[0]);
+    fireEvent.click(getByText('點我加 1'));
     expect(getByTestId('display_count').textContent).toBe('點了3下');
   });
 
   test('直接預設 store ，保管的 state 從 -3 開始', () => {
-    const store = createStore(() => ({
+    const store = createStore(reducer, {
       count: -3,
-    }));
+    });
 
-    const { container, getByTestId, } = renderWithRedux(<Counter />, { store, });
-
+    const { getByText, getByTestId, } = renderWithRedux(<Counter />, { store, });
     // +2
-    fireEvent.click(container.querySelectorAll('[class="add_button"]')[1]);
+    fireEvent.click(getByText('點我加 2'));
     expect(getByTestId('display_count').textContent).toBe('點了-1下');
   });
 });
