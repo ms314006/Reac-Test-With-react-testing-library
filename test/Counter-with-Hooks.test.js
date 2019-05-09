@@ -14,4 +14,19 @@ describe('Test <Counter />', () => {
     expect(getByText('點了0下').textContent).toBe('點了0下');
     expect(container.querySelector('span').innerHTML).toBe('點了0下');
   });
+
+  test('測試點擊功能是否正常', () => {
+    // render 畫面
+    const { getByText, getByTestId, } = render(<Counter />);
+
+    // 首先找到 +1 button
+    let addButton = getByText('點我加 1');
+    fireEvent.click(addButton);
+    expect(getByTestId('display_count').textContent).toBe('點了1下');
+
+    // 接著找到 +2 button
+    addButton = getByText('點我加 2');
+    fireEvent.click(addButton);
+    expect(getByTestId('display_count').textContent).toBe('點了3下');
+  });
 });
